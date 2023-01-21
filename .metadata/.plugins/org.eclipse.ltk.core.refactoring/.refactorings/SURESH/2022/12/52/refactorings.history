@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move package &apos;loop_mechanism&apos; to &apos;Reena Java/src&apos;&#x0D;&#x0A;- Original project: &apos;SURESH&apos;&#x0D;&#x0A;- Destination element: &apos;Reena Java/src&apos;&#x0D;&#x0A;- Original element: &apos;SURESH/src/loop_mechanism&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move package" destination="=Reena Java/src" element1="/src&lt;loop_mechanism" flags="589830" fragments="1" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.movePackages" stamp="1671609700606" version="1.0"/>
+</session>

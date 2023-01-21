@@ -1,0 +1,13 @@
+package com.mavenscript.Project_5_Flight_Booking;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+        System.out.println( "Hello World!" );
+    }
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
+  <test thread-count="5" name="Default test(failed)">
+    <classes>
+      <class name="com.maven.Maven.Amazon_TestNG_Script">
+        <methods>
+          <include name="navigateTo"/>
+          <include name="navigateRefresh"/>
+          <include name="passDisplayed"/>
+          <include name="mouseBasedActions"/>
+          <include name="drpDownSelect"/>
+          <include name="parentFrame"/>
+          <include name="passSendKeys"/>
+          <include name="browserLaunch"/>
+          <include name="maximize"/>
+          <include name="passAttribute"/>
+          <include name="alert"/>
+          <include name="close"/>
+          <include name="frameSwitch"/>
+          <include name="defaultContent"/>
+          <include name="fullScreen"/>
+          <include name="launchURL"/>
+          <include name="navigateBack"/>
+          <include name="acceptSendkeys"/>
+          <include name="passSelected"/>
+          <include name="passClear"/>
+          <include name="quit"/>
+          <include name="passEnabled"/>
+          <include name="passClick"/>
+          <include name="navigateForward"/>
+          <include name="BrowserClose"/>
+          <include name="launchUrl"/>
+        </methods>
+      </class> <!-- com.maven.Maven.Amazon_TestNG_Script -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

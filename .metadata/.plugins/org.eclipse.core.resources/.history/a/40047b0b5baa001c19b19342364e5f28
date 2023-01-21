@@ -1,0 +1,69 @@
+package com.selinium;
+
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import java.util.Set;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class ActionsConcepts {
+
+
+public static void main(String[] args) throws Throwable {
+		
+		System.setProperty("webdriver.chrome.driver","C:\\Users\\AMUDHAVAN\\eclipse-workspace\\selinium\\Driver\\chromedriver.exe");
+		
+	WebDriver driver = new ChromeDriver();
+	
+
+	driver.get("https://www.amazon.in/");
+		
+	
+	Actions act =  new Actions(driver);
+	
+    WebElement s = driver.findElement(By.xpath("(//a[text()='Baby'])[1]"));
+ 
+	act.contextClick(s).build().perform();
+	//ROBOT 
+	Robot rob = new Robot();
+
+	rob.keyPress(KeyEvent.VK_DOWN);
+   
+
+	rob.keyRelease(KeyEvent.VK_DOWN);
+	 
+	 
+	rob.keyPress(KeyEvent.VK_ENTER);
+	
+	rob.keyRelease(KeyEvent.VK_ENTER);
+	
+	WebElement ec = driver.findElement(By.xpath("(//a[text()='Electronics']"));
+	act.contextClick(ec).build().perform();
+	
+
+	rob.keyPress(KeyEvent.VK_DOWN);
+   
+
+	rob.keyRelease(KeyEvent.VK_DOWN);
+	 
+	 
+	rob.keyPress(KeyEvent.VK_ENTER);
+	
+	rob.keyRelease(KeyEvent.VK_ENTER);
+	
+	
+	
+	
+	String windowHandle = driver.getWindowHandle();
+	System.out.println(windowHandle);
+	 Set<String> win = driver.getWindowHandles();
+	 for (String string : win) {
+		String title = driver.switchTo().window(string).getTitle();
+	System.out.println(title);
+	}
+	
+}}

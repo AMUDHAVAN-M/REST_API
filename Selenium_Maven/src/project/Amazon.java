@@ -1,0 +1,144 @@
+package project;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.support.ui.Select;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class Amazon {
+
+	private static List<String> listOfChromeOptions() {
+
+		List<String> listOfOptions = new ArrayList<String>();
+		listOfOptions.add("start-maximized");
+
+		return listOfOptions;
+	}
+
+	public static void main(String[] args) throws InterruptedException, IOException {
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments(listOfChromeOptions());
+		WebDriverManager.chromedriver().setup();
+
+		WebDriver driver = new ChromeDriver(options);
+
+		driver.get("https://www.amazon.in/");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+		String SelectValue = "babY";
+
+		WebElement dropDown = driver.findElement(By.id("searchDropdownBox"));
+
+		Select s = new Select(dropDown);
+
+		List<WebElement> dropdownOptions = s.getOptions();
+
+		for (int i = 0; i < dropdownOptions.size(); i++) {
+
+			WebElement each_option = dropdownOptions.get(i);
+
+			String eachText = each_option.getText();
+
+			if (eachText.equalsIgnoreCase(SelectValue)) {
+				s.selectByVisibleText(eachText);
+			}
+		}
+
+		String searchProduct = "Soft Toys";
+
+		WebElement search = driver.findElement(By.id("twotabsearchtextbox"));
+		search.sendKeys(searchProduct);
+
+		Thread.sleep(2000);
+
+		List<WebElement> relevant = driver
+				.findElements(By.xpath("//div[@class='autocomplete-results-container']/child::div"));
+
+		for (int i = 1; i <= relevant.size(); i++) {
+
+			WebElement eachProduct = driver.findElement(By.xpath(
+					"//div[@class='autocomplete-results-container']/child::div[" + i + "]/div/div[@role='button']"));
+
+			String eachProductText = eachProduct.getText();
+
+			if (eachProductText.equalsIgnoreCase(searchProduct)) {
+				eachProduct.click();
+				break;
+			}
+
+		}
+		Thread.sleep(3000);
+
+		WebElement firstproduct = driver
+				.findElement(By.xpath("//span[text()='RESULTS']/ancestor::div[4]/following-sibling::div[1]//h2"));
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].scrollIntoView(true);", firstproduct);
+
+		String firstProductTitle = firstproduct.getText();
+
+		System.out.println(firstProductTitle);
+
+		WebElement firstProductOffer = driver.findElement(By
+				.xpath("//span[text()='RESULTS']/ancestor::div[4]/following-sibling::div[1]//span[@class='a-price']"));
+
+		String fPOP = firstProductOffer.getText();
+
+		System.out.println(fPOP);
+		String parentId = driver.getWindowHandle();
+
+		firstproduct.click();
+
+		Thread.sleep(3000);
+
+		String Current_title = driver.getTitle();
+
+		System.out.println(Current_title);
+
+		Set<String> all_Id = driver.getWindowHandles();
+
+		System.out.println(all_Id.size());
+
+		for (String id : all_Id) {
+
+			if (!(id.equals(parentId))) {
+				driver.switchTo().window(id);
+			}
+
+		}
+
+		System.out.println(driver.getTitle());
+        
+		WebElement Add_Cart = driver.findElement(By.id("add-to-cart-button"));
+		Add_Cart.click();
+		Thread.sleep(4000);
+		TakesScreenshot ts = (TakesScreenshot) driver;
+		File source = ts.getScreenshotAs(OutputType.FILE);
+		File destination = new File(
+				"C:\\Users\\AMUDHAVAN\\eclipse-workspace\\Selenium_Maven\\Screenshot\\amazon.png");
+		FileHandler.copy(source, destination);
+
+		WebElement Cart_Option = driver.findElement(By.id("nav-cart"));
+		Cart_Option.click();
+		WebElement Procced_Pay = driver.findElement(By.xpath("(//input[@class='a-button-input'])[1]"));
+		Procced_Pay.click();
+
+	}
+
+}
+
+
